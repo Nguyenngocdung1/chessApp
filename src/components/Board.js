@@ -4,12 +4,15 @@ import '../static/Board.css'
 import { ROOK_B, KNIGHT_B, BISHOP_B, PAWN_B, QUEEN_B, KING_B } from '../Piece';
 import { ROOK_W, KNIGHT_W, BISHOP_W, PAWN_W, QUEEN_W, KING_W } from '../Piece';
 
+const WHITE_PIECE = 'WHITE_PIECE'
+const BLACK_PIECE = 'BLACK_PIECE'
+
 export default class Board extends Component {
     constructor(props){
         super(props);
         this.state = {
             allSquare: [],
-            toMove: {piece: '', position: ''}
+            willMove: {piece: '', position: '', ready: false, color: ''}
         }
     }
 
@@ -21,6 +24,20 @@ export default class Board extends Component {
             var positions = theFile.map(item => {
                 var position = item+(8-i);
                 var pieceDefault = '';
+                var color = '';
+                var row = 8-i;
+
+                switch(row){
+                    case 1:
+                    case 2:
+                        color = WHITE_PIECE;
+                        break;
+                    case 7:
+                    case 8:
+                        color = BLACK_PIECE;
+                        break;
+                }
+
                 switch(position) {
                     case 'a1':
                     case 'h1': {
@@ -91,7 +108,7 @@ export default class Board extends Component {
                         break;
                     }
                 }
-                return { position: position, currentPiece: pieceDefault }
+                return { position: position, currentPiece: pieceDefault, pieceColor: color }
             })
             squares.push(positions);
         }
@@ -100,18 +117,34 @@ export default class Board extends Component {
         })
     }
 
+    choosePieceToMove(pos, pie, pieColor){
+        const { willMove } = this.state;
+        
+        this.setState({
+            willMove: ((!willMove.ready && pie !== '') 
+                || (pieColor === willMove.color && pos !== willMove.position && pieColor !== ''))? 
+                {piece: pie, position: pos, ready: true, color: pieColor}:{...willMove, ready: false, color: ''}
+        })
+        
+    }
+
     render(){
-        const { allSquare } = this.state
-        console.log(allSquare);
+        const { allSquare, willMove } = this.state;
+        console.log(willMove)
         return(
             <div className="board">
+                <h1>Chess</h1>
                 {allSquare.length > 0 && allSquare.map((item, x) => (
-                    <div className="thefile">
+                    <div key={x} className="thefile">
                         {allSquare[x].map((item2, y) => {
-                            if((x % 2 === 0 && y % 2 === 0) || (x % 2 != 0 && y % 2 != 0)){
-                                return <Square color="white" piece={item2.currentPiece} />
-                            }
-                            return <Square color="black" piece={item2.currentPiece} />
+                            return <Square 
+                                    key={item2.positions}
+                                    choosing={willMove}
+                                    itsPosition={item2.position}
+                                    choosePieceToMove={() => this.choosePieceToMove(item2.position, item2.currentPiece, item2.pieceColor)}
+                                    color={(x % 2 === 0 && y % 2 === 0) || (x % 2 !== 0 && y % 2 !== 0)? "white":"black"} 
+                                    piece={item2.currentPiece} 
+                                />
                         })}
                     </div>
                     
