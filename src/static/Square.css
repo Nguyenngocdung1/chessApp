@@ -1,0 +1,18 @@
+.square {
+    width: 85px;
+    height: 85px;
+    border: none;
+}
+
+.black {
+    background: #262f3b;
+}
+
+.white {
+    background: #6a7687;
+}
+
+.square img {
+    width: 100%;
+    text-align: center;
+}
