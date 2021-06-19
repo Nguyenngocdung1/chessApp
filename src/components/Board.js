@@ -3,6 +3,7 @@ import Square from './Square';
 import '../static/Board.css'
 import { ROOK_B, KNIGHT_B, BISHOP_B, PAWN_B, QUEEN_B, KING_B } from '../Piece';
 import { ROOK_W, KNIGHT_W, BISHOP_W, PAWN_W, QUEEN_W, KING_W } from '../Piece';
+import { pieceMove } from '../howToPlay/howToPlay';
 
 const WHITE_PIECE = 'WHITE_PIECE'
 const BLACK_PIECE = 'BLACK_PIECE'
@@ -12,7 +13,7 @@ export default class Board extends Component {
         super(props);
         this.state = {
             allSquare: [],
-            willMove: {piece: '', position: '', ready: false, color: ''}
+            willMove: {piece: '', position: '', ready: false, color: '', curX: '', curY: ''}
         }
     }
 
@@ -108,7 +109,7 @@ export default class Board extends Component {
                         break;
                     }
                 }
-                return { position: position, currentPiece: pieceDefault, pieceColor: color }
+                return { position: position, currentPiece: pieceDefault, pieceColor: color, possibleToMove: false }
             })
             squares.push(positions);
         }
@@ -117,16 +118,51 @@ export default class Board extends Component {
         })
     }
 
-    choosePieceToMove(pos, pie, pieColor){
-        const { willMove } = this.state;
-        
-        this.setState({
-            willMove: ((!willMove.ready && pie !== '') 
-                || (pieColor === willMove.color && pos !== willMove.position && pieColor !== ''))? 
-                {piece: pie, position: pos, ready: true, color: pieColor}:{...willMove, ready: false, color: ''}
-        })
-        
+    changeSquare() {
+
     }
+
+    choosePieceToMove(pos, pie, pieColor, x, y){
+        const { willMove, allSquare } = this.state;
+        if((!willMove.ready && pie !== '') 
+        || (pieColor === willMove.color && pos !== willMove.position && pieColor !== '')) {
+            allSquare.map((item, xSquare) => {
+                allSquare[x].map((item2, ySquare) => {
+                    if(allSquare[xSquare][ySquare].possibleToMove = true) {
+                        allSquare[xSquare][ySquare].possibleToMove = false
+                    }
+                    if(pieceMove(xSquare, ySquare, x, y, pie)){
+                        console.log(xSquare + " >>>> " + ySquare);
+                        allSquare[xSquare][ySquare].possibleToMove = true
+                        this.setState({
+                            // allSquare: [
+                            //     ...allSquare.slice(0, xSquare),
+                            //     [
+                            //         ...allSquare[xSquare].slice(0, ySquare),
+                            //         { ...allSquare[xSquare][ySquare], possibleToMove: true },
+                            //         ...allSquare[xSquare].slice(ySquare + 1)
+                            //     ],
+                            //     ...allSquare.slice(xSquare + 1)
+                            // ]
+                            allSquare: allSquare
+                        })
+                        
+                    }
+                })
+            })
+            this.setState({
+                willMove: {piece: pie, position: pos, ready: true, color: pieColor, curX: x, curY: y}
+            })
+        }
+        else {
+            if(willMove.ready) {
+
+            }
+        }
+          
+    }
+
+
 
     render(){
         const { allSquare, willMove } = this.state;
@@ -139,11 +175,10 @@ export default class Board extends Component {
                         {allSquare[x].map((item2, y) => {
                             return <Square 
                                     key={item2.positions}
+                                    item={item2}
                                     choosing={willMove}
-                                    itsPosition={item2.position}
-                                    choosePieceToMove={() => this.choosePieceToMove(item2.position, item2.currentPiece, item2.pieceColor)}
+                                    choosePieceToMove={() => this.choosePieceToMove(item2.position, item2.currentPiece, item2.pieceColor, x, y)}
                                     color={(x % 2 === 0 && y % 2 === 0) || (x % 2 !== 0 && y % 2 !== 0)? "white":"black"} 
-                                    piece={item2.currentPiece} 
                                 />
                         })}
                     </div>

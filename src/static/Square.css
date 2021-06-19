@@ -4,6 +4,10 @@
     border: none;
 }
 
+.square:focus {
+    outline: none;
+}
+
 .black {
     background: #262f3b;
 }
@@ -19,4 +23,8 @@
 
 .choosing {
     background: #949a44 !important;
+}
+
+.possibletomove {
+    opacity: 0.3;
 }
