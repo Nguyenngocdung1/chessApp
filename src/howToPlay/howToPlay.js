@@ -46,6 +46,43 @@ export const pieceMove = (x, y, curX, curY, pie) => {
             possiblePoints.push({a: curX - 1, b: curY});
             break;
         }
+        case PAWN_B: {
+            if(curX === 1) {
+                possiblePoints.push({a: curX + 2, b: curY});
+            }
+            possiblePoints.push({a: curX + 1, b: curY});
+            break;
+        }
+        case QUEEN_B: 
+        case QUEEN_W: {
+            {
+                for (let i = 1; i <= 7; i ++){
+                    possiblePoints.push({a: curX + i, b: curY});
+                    possiblePoints.push({a: curX - i, b: curY});
+                    possiblePoints.push({a: curX, b: curY + i});
+                    possiblePoints.push({a: curX, b: curY - i});
+
+                    possiblePoints.push({a: curX + i, b: curY + i});
+                    possiblePoints.push({a: curX - i, b: curY - i});
+                    possiblePoints.push({a: curX + i, b: curY - i});
+                    possiblePoints.push({a: curX - i, b: curY + i});
+                }
+                break;
+            }
+        }
+        case KING_B: 
+        case KING_W: {
+            possiblePoints.push({a: curX + 1, b: curY});
+            possiblePoints.push({a: curX - 1, b: curY});
+            possiblePoints.push({a: curX, b: curY + 1});
+            possiblePoints.push({a: curX, b: curY - 1});
+
+            possiblePoints.push({a: curX + 1, b: curY + 1});
+            possiblePoints.push({a: curX - 1, b: curY - 1});
+            possiblePoints.push({a: curX + 1, b: curY - 1});
+            possiblePoints.push({a: curX - 1, b: curY + 1});
+            break;
+        }
     }
     for (let i = 0; i < possiblePoints.length; i ++){
         if(possiblePoints[i].a === x && possiblePoints[i].b === y) return true

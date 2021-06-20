@@ -124,26 +124,18 @@ export default class Board extends Component {
 
     choosePieceToMove(pos, pie, pieColor, x, y){
         const { willMove, allSquare } = this.state;
+        console.log("COLOR: " + pos);
         if((!willMove.ready && pie !== '') 
         || (pieColor === willMove.color && pos !== willMove.position && pieColor !== '')) {
+
             allSquare.map((item, xSquare) => {
-                allSquare[x].map((item2, ySquare) => {
+                allSquare[xSquare].map((item2, ySquare) => {
                     if(allSquare[xSquare][ySquare].possibleToMove = true) {
                         allSquare[xSquare][ySquare].possibleToMove = false
                     }
-                    if(pieceMove(xSquare, ySquare, x, y, pie)){
-                        console.log(xSquare + " >>>> " + ySquare);
+                    if(pieceMove(xSquare, ySquare, x, y, pie) && (item2.pieceColor !== pieColor)){
                         allSquare[xSquare][ySquare].possibleToMove = true
                         this.setState({
-                            // allSquare: [
-                            //     ...allSquare.slice(0, xSquare),
-                            //     [
-                            //         ...allSquare[xSquare].slice(0, ySquare),
-                            //         { ...allSquare[xSquare][ySquare], possibleToMove: true },
-                            //         ...allSquare[xSquare].slice(ySquare + 1)
-                            //     ],
-                            //     ...allSquare.slice(xSquare + 1)
-                            // ]
                             allSquare: allSquare
                         })
                         
@@ -160,6 +152,11 @@ export default class Board extends Component {
             }
         }
           
+    }
+
+    blockedTheWay(pie, x, y) {
+        const { allSquare } = this.state;
+
     }
 
 
