@@ -154,9 +154,11 @@ export default class Board extends Component {
           
     }
 
-    blockedTheWay(pie, x, y) {
+    blockedTheWay(x, y) {
         const { allSquare } = this.state;
-
+        for (let i=x+1; i<8; i++) {
+            
+        }
     }
 
 
