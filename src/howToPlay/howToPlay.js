@@ -3,17 +3,29 @@ import { ROOK_W, KNIGHT_W, BISHOP_W, PAWN_W, QUEEN_W, KING_W } from '../Piece';
 
 const eightMoves = [1, 2, 3, 4, 5, 6, 7, 8]
 
-export const pieceMove = (x, y, curX, curY, pie) => {
+export const pieceMove = (x, y, curX, curY, pie, allSquare) => {
     let possiblePoints = [];
     switch(pie){
         case ROOK_W:
-        case ROOK_B: 
-        {
+        case ROOK_B: {
             for (let i = 1; i <= 7; i ++){
-                possiblePoints.push({a: curX + i, b: curY});
-                possiblePoints.push({a: curX - i, b: curY});
-                possiblePoints.push({a: curX, b: curY + i});
-                possiblePoints.push({a: curX, b: curY - i});
+                if(allSquare[curX+i] === undefined || allSquare[curX+i][curY].currentPiece) break;
+                else possiblePoints.push({a: curX + i, b: curY});
+                
+            }
+            for (let i = 1; i <= 7; i ++){
+                if(allSquare[curX-i][curY] === undefined || allSquare[curX-i][curY].currentPiece)  break;
+                else possiblePoints.push({a: curX - i, b: curY});
+                
+            }
+            for (let i = 1; i <= 7; i ++){
+                if(allSquare[curX][curY+i] === undefined || allSquare[curX][curY+i].currentPiece) break;
+                else possiblePoints.push({a: curX, b: curY + i});
+                
+            }    
+            for (let i = 1; i <= 7; i ++){
+                if(allSquare[curX][curY-i] === undefined || allSquare[curX][curY-i].currentPiece) break;
+                else possiblePoints.push({a: curX, b: curY - i});
             }
             break;
         }
@@ -31,56 +43,114 @@ export const pieceMove = (x, y, curX, curY, pie) => {
         }
         case BISHOP_B:
         case BISHOP_W: {
-            for (let i = 1; i <= 8; i ++){
-                possiblePoints.push({a: curX + i, b: curY + i});
-                possiblePoints.push({a: curX - i, b: curY - i});
-                possiblePoints.push({a: curX + i, b: curY - i});
-                possiblePoints.push({a: curX - i, b: curY + i});
+            for (let i = 1; i <= 7; i ++){
+                if(allSquare[curX+i] === undefined || allSquare[curX+i][curY+i] === undefined || allSquare[curX+i][curY+i].currentPiece) break;
+                else possiblePoints.push({a: curX + i, b: curY + i});
+                
+            }
+            for (let i = 1; i <= 7; i ++){
+                if(allSquare[curX-i] === undefined || allSquare[curX-i][curY-i] === undefined || allSquare[curX-i][curY-i].currentPiece)  break;
+                else possiblePoints.push({a: curX - i, b: curY - i});
+                
+            }
+            for (let i = 1; i <= 7; i ++){
+                if(allSquare[curX+i] === undefined || allSquare[curX+i][curY-i] === undefined || allSquare[curX+i][curY-i].currentPiece) break;
+                else possiblePoints.push({a: curX + 1, b: curY - i});
+                
+            }    
+            for (let i = 1; i <= 7; i ++){
+                if(allSquare[curX-i] === undefined || allSquare[curX-i][curY+i] === undefined || allSquare[curX-i][curY+i].currentPiece) break;
+                else possiblePoints.push({a: curX - i, b: curY + i});
             }
             break;
         }
         case PAWN_W: {
-            if(curX === 6) {
-                possiblePoints.push({a: curX - 2, b: curY});
+            if(!(allSquare[curX-1] === undefined  || allSquare[curX-1][curY].currentPiece)) {
+                if(curX === 6 && !(allSquare[curX-2][curY].currentPiece)) {
+                    possiblePoints.push({a: curX - 2, b: curY});                
+                }
+                possiblePoints.push({a: curX - 1, b: curY});
             }
-            possiblePoints.push({a: curX - 1, b: curY});
+            
             break;
         }
         case PAWN_B: {
-            if(curX === 1) {
-                possiblePoints.push({a: curX + 2, b: curY});
+            if(!(allSquare[curX+1] === undefined  || allSquare[curX+1][curY].currentPiece)) {
+                if(curX === 1 && !(allSquare[curX+2][curY].currentPiece)) {
+                    possiblePoints.push({a: curX + 2, b: curY});                
+                }
+                possiblePoints.push({a: curX + 1, b: curY});
             }
-            possiblePoints.push({a: curX + 1, b: curY});
             break;
         }
         case QUEEN_B: 
         case QUEEN_W: {
             {
                 for (let i = 1; i <= 7; i ++){
-                    possiblePoints.push({a: curX + i, b: curY});
-                    possiblePoints.push({a: curX - i, b: curY});
-                    possiblePoints.push({a: curX, b: curY + i});
-                    possiblePoints.push({a: curX, b: curY - i});
-
-                    possiblePoints.push({a: curX + i, b: curY + i});
-                    possiblePoints.push({a: curX - i, b: curY - i});
-                    possiblePoints.push({a: curX + i, b: curY - i});
-                    possiblePoints.push({a: curX - i, b: curY + i});
+                    if(allSquare[curX+i] === undefined || allSquare[curX+i][curY].currentPiece) break;
+                    else possiblePoints.push({a: curX + i, b: curY});
+                    
                 }
+                for (let i = 1; i <= 7; i ++){
+                    if(allSquare[curX-i][curY] === undefined || allSquare[curX-i][curY].currentPiece)  break;
+                    else possiblePoints.push({a: curX - i, b: curY});
+                    
+                }
+                for (let i = 1; i <= 7; i ++){
+                    if(allSquare[curX][curY+i] === undefined || allSquare[curX][curY+i].currentPiece) break;
+                    else possiblePoints.push({a: curX, b: curY + i});
+                    
+                }    
+                for (let i = 1; i <= 7; i ++){
+                    if(allSquare[curX][curY-i] === undefined || allSquare[curX][curY-i].currentPiece) break;
+                    else possiblePoints.push({a: curX, b: curY - i});
+                }
+
+
+                for (let i = 1; i <= 7; i ++){
+                    if(allSquare[curX+i] === undefined || allSquare[curX+i][curY+i] === undefined || allSquare[curX+i][curY+i].currentPiece) break;
+                    else possiblePoints.push({a: curX + i, b: curY + i});
+                    
+                }
+                for (let i = 1; i <= 7; i ++){
+                    if(allSquare[curX-i] === undefined || allSquare[curX-i][curY-i] === undefined || allSquare[curX-i][curY-i].currentPiece)  break;
+                    else possiblePoints.push({a: curX - i, b: curY - i});
+                    
+                }
+                for (let i = 1; i <= 7; i ++){
+                    if(allSquare[curX+i] === undefined || allSquare[curX+i][curY-i] === undefined || allSquare[curX+i][curY-i].currentPiece) break;
+                    else possiblePoints.push({a: curX + 1, b: curY - i});
+                    
+                }    
+                for (let i = 1; i <= 7; i ++){
+                    if(allSquare[curX-i] === undefined || allSquare[curX-i][curY+i] === undefined || allSquare[curX-i][curY+i].currentPiece) break;
+                    else possiblePoints.push({a: curX - i, b: curY + i});
+                }
+                    // possiblePoints.push({a: curX + i, b: curY});
+                    // possiblePoints.push({a: curX - i, b: curY});
+                    // possiblePoints.push({a: curX, b: curY + i});
+                    // possiblePoints.push({a: curX, b: curY - i});
+
+                    // possiblePoints.push({a: curX + i, b: curY + i});
+                    // possiblePoints.push({a: curX - i, b: curY - i});
+                    // possiblePoints.push({a: curX + i, b: curY - i});
+                    // possiblePoints.push({a: curX - i, b: curY + i});
+                
                 break;
             }
         }
         case KING_B: 
         case KING_W: {
-            possiblePoints.push({a: curX + 1, b: curY});
-            possiblePoints.push({a: curX - 1, b: curY});
-            possiblePoints.push({a: curX, b: curY + 1});
-            possiblePoints.push({a: curX, b: curY - 1});
-
-            possiblePoints.push({a: curX + 1, b: curY + 1});
-            possiblePoints.push({a: curX - 1, b: curY - 1});
-            possiblePoints.push({a: curX + 1, b: curY - 1});
-            possiblePoints.push({a: curX - 1, b: curY + 1});
+            if(!(allSquare[curX+1] === undefined || allSquare[curX+1][curY].currentPiece)) possiblePoints.push({a: curX + 1, b: curY});
+            if(!(allSquare[curX-1] === undefined || allSquare[curX-1][curY].currentPiece)) possiblePoints.push({a: curX - 1, b: curY});
+            if(!(allSquare[curX][curY+1] === undefined || allSquare[curX][curY+1].currentPiece)) possiblePoints.push({a: curX, b: curY + 1});
+            if(!(allSquare[curX][curY-1] === undefined || allSquare[curX][curY-1].currentPiece)) possiblePoints.push({a: curX, b: curY - 1});
+            
+            if(!(allSquare[curX+1] === undefined || allSquare[curX+1][curY+1] === undefined || allSquare[curX+1][curY+1].currentPiece)) possiblePoints.push({a: curX + 1, b: curY + 1});
+            if(!(allSquare[curX-1] === undefined || allSquare[curX-1][curY-1] === undefined || allSquare[curX-1][curY-1].currentPiece)) possiblePoints.push({a: curX - 1, b: curY - 1});
+            if(!(allSquare[curX+1] === undefined || allSquare[curX+1][curY-1] === undefined || allSquare[curX+1][curY-1].currentPiece)) possiblePoints.push({a: curX + 1, b: curY - 1});
+            if(!(allSquare[curX-1] === undefined || allSquare[curX-1][curY+1] === undefined || allSquare[curX-1][curY+1].currentPiece)) possiblePoints.push({a: curX - 1, b: curY + 1});
+            
             break;
         }
     }

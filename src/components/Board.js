@@ -22,7 +22,7 @@ export default class Board extends Component {
         const theRank = [1, 2, 3, 4, 5, 6, 7, 8];
         const squares = [];
         for (let i = 0; i < theRank.length; i ++){
-            var positions = theFile.map(item => {
+            var positions = theFile.map((item, index) => {
                 var position = item+(8-i);
                 var pieceDefault = '';
                 var color = '';
@@ -109,7 +109,7 @@ export default class Board extends Component {
                         break;
                     }
                 }
-                return { position: position, currentPiece: pieceDefault, pieceColor: color, possibleToMove: false }
+                return { position: position, currentPiece: pieceDefault, pieceColor: color, possibleToMove: false, x: i, y: index }
             })
             squares.push(positions);
         }
@@ -118,8 +118,15 @@ export default class Board extends Component {
         })
     }
 
-    changeSquare() {
-
+    defaultPossibleToMove() {
+        const { willMove, allSquare } = this.state;
+        allSquare.map((item, xSquare) => {
+            allSquare[xSquare].map((item2, ySquare) => {
+                if(allSquare[xSquare][ySquare].possibleToMove = true) {
+                    allSquare[xSquare][ySquare].possibleToMove = false
+                }
+            })
+        })
     }
 
     choosePieceToMove(pos, pie, pieColor, x, y){
@@ -127,18 +134,12 @@ export default class Board extends Component {
         console.log("COLOR: " + pos);
         if((!willMove.ready && pie !== '') 
         || (pieColor === willMove.color && pos !== willMove.position && pieColor !== '')) {
-
+            this.defaultPossibleToMove();
             allSquare.map((item, xSquare) => {
                 allSquare[xSquare].map((item2, ySquare) => {
-                    if(allSquare[xSquare][ySquare].possibleToMove = true) {
-                        allSquare[xSquare][ySquare].possibleToMove = false
-                    }
-                    if(pieceMove(xSquare, ySquare, x, y, pie) && (item2.pieceColor !== pieColor)){
-                        allSquare[xSquare][ySquare].possibleToMove = true
-                        this.setState({
-                            allSquare: allSquare
-                        })
-                        
+                    if((pieceMove(xSquare, ySquare, x, y, pie, allSquare ) && pie!==KNIGHT_B && pie!==KNIGHT_W)
+                    || (pieceMove(xSquare, ySquare, x, y, pie, allSquare ) && (pie==KNIGHT_B || pie==KNIGHT_W) && pieColor!==item2.pieceColor)) {
+                        allSquare[xSquare][ySquare].possibleToMove = true;
                     }
                 })
             })
@@ -147,18 +148,19 @@ export default class Board extends Component {
             })
         }
         else {
-            if(willMove.ready) {
-
+            if(willMove.ready && allSquare[x][y].possibleToMove) {
+                this.defaultPossibleToMove();
+                allSquare[x][y].currentPiece = willMove.piece;
+                allSquare[x][y].pieceColor = willMove.color;
+                allSquare[willMove.curX][willMove.curY].currentPiece = ''
+                allSquare[willMove.curX][willMove.curY].pieceColor = ''
+                willMove.ready = false;
+                this.setState({
+                    allSquare: allSquare
+                })
             }
         }
           
-    }
-
-    blockedTheWay(x, y) {
-        const { allSquare } = this.state;
-        for (let i=x+1; i<8; i++) {
-            
-        }
     }
 
 
