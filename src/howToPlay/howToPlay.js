@@ -136,7 +136,7 @@ export const pieceMove = (x, y, curX, curY, pie, allSquare) => {
                 }
                 for (let i = 1; i <= 7; i++) {
                     if (allSquare[curX + i] === undefined || allSquare[curX + i][curY - i] === undefined || allSquare[curX + i][curY - i].currentPiece) break;
-                    else possiblePoints.push({ a: curX + 1, b: curY - i });
+                    else possiblePoints.push({ a: curX + i, b: curY - i });
 
                 }
                 for (let i = 1; i <= 7; i++) {
