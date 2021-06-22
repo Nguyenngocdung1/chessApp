@@ -16,9 +16,13 @@
     background: #6a7687;
 }
 
-.square img {
+.imgButton {
     width: 100%;
     text-align: center;
+}
+
+.rotate {
+    transform: rotateZ(180deg);
 }
 
 .choosing {

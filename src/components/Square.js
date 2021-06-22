@@ -16,12 +16,12 @@ import q_w from '../static/pieceImg/q_w.png'
 import k_w from '../static/pieceImg/k_w.png'
 
 export default class Square extends Component {
-    render(){
-        const { color, choosePieceToMove, choosing, item} = this.props;
+    render() {
+        const { color, choosePieceToMove, choosing, item, whiteTurn } = this.props;
         var empty = '';
         var pieceImg = '';
         var buttonClass = 'square';
-        switch(item.currentPiece) {
+        switch (item.currentPiece) {
             case ROOK_B: {
                 pieceImg = r_b;
                 break;
@@ -77,15 +77,15 @@ export default class Square extends Component {
             }
         }
 
-        if(color === "black") buttonClass += ' black';
+        if (color === "black") buttonClass += ' black';
         else buttonClass += ' white';
 
-        if(choosing.ready && choosing.piece !== '' && choosing.position === item.position) buttonClass += ' choosing';
-        if(item.possibleToMove) buttonClass += ' possibletomove'
+        if (choosing.ready && choosing.piece !== '' && choosing.position === item.position) buttonClass += ' choosing';
+        if (item.possibleToMove) buttonClass += ' possibletomove'
 
-        return(
+        return (
             <button onClick={choosePieceToMove} className={buttonClass}>
-                {empty? '':<img src={pieceImg} alt="square" />}
+                {empty ? '' : <img className={whiteTurn? "imgButton":"imgButton rotate"} src={pieceImg} alt="square" />}
             </button>
         )
     }

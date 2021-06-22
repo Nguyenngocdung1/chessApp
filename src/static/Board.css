@@ -1,3 +1,7 @@
 .thefile {
     height: 85px;
 }
+
+.rotate {
+    transform: rotateZ(180deg);
+}

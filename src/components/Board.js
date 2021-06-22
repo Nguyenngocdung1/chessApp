@@ -9,26 +9,27 @@ const WHITE_PIECE = 'WHITE_PIECE'
 const BLACK_PIECE = 'BLACK_PIECE'
 
 export default class Board extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             allSquare: [],
-            willMove: {piece: '', position: '', ready: false, color: '', curX: '', curY: ''}
+            willMove: { piece: '', position: '', ready: false, color: '', curX: '', curY: '' },
+            whiteTurn: true
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const theFile = ["a", "b", 'c', "d", "e", "f", "g", "h"];
         const theRank = [1, 2, 3, 4, 5, 6, 7, 8];
         const squares = [];
-        for (let i = 0; i < theRank.length; i ++){
+        for (let i = 0; i < theRank.length; i++) {
             var positions = theFile.map((item, index) => {
-                var position = item+(8-i);
+                var position = item + (8 - i);
                 var pieceDefault = '';
                 var color = '';
-                var row = 8-i;
+                var row = 8 - i;
 
-                switch(row){
+                switch (row) {
                     case 1:
                     case 2:
                         color = WHITE_PIECE;
@@ -39,7 +40,7 @@ export default class Board extends Component {
                         break;
                 }
 
-                switch(position) {
+                switch (position) {
                     case 'a1':
                     case 'h1': {
                         pieceDefault = ROOK_W;
@@ -122,33 +123,33 @@ export default class Board extends Component {
         const { willMove, allSquare } = this.state;
         allSquare.map((item, xSquare) => {
             allSquare[xSquare].map((item2, ySquare) => {
-                if(allSquare[xSquare][ySquare].possibleToMove = true) {
+                if (allSquare[xSquare][ySquare].possibleToMove = true) {
                     allSquare[xSquare][ySquare].possibleToMove = false
                 }
             })
         })
     }
 
-    choosePieceToMove(pos, pie, pieColor, x, y){
-        const { willMove, allSquare } = this.state;
+    choosePieceToMove(pos, pie, pieColor, x, y) {
+        const { willMove, allSquare, whiteTurn } = this.state;
         console.log("COLOR: " + pos);
-        if((!willMove.ready && pie !== '') 
-        || (pieColor === willMove.color && pos !== willMove.position && pieColor !== '')) {
+        if ((!willMove.ready && pie !== '')
+            || (pieColor === willMove.color && pos !== willMove.position && pieColor !== '')) {
             this.defaultPossibleToMove();
             allSquare.map((item, xSquare) => {
                 allSquare[xSquare].map((item2, ySquare) => {
-                    if((pieceMove(xSquare, ySquare, x, y, pie, allSquare ) && pie!==KNIGHT_B && pie!==KNIGHT_W)
-                    || (pieceMove(xSquare, ySquare, x, y, pie, allSquare ) && (pie==KNIGHT_B || pie==KNIGHT_W) && pieColor!==item2.pieceColor)) {
+                    if ((pieceMove(xSquare, ySquare, x, y, pie, allSquare) && pie !== KNIGHT_B && pie !== KNIGHT_W)
+                        || (pieceMove(xSquare, ySquare, x, y, pie, allSquare) && (pie == KNIGHT_B || pie == KNIGHT_W) && pieColor !== item2.pieceColor)) {
                         allSquare[xSquare][ySquare].possibleToMove = true;
                     }
                 })
             })
             this.setState({
-                willMove: {piece: pie, position: pos, ready: true, color: pieColor, curX: x, curY: y}
+                willMove: { piece: pie, position: pos, ready: true, color: pieColor, curX: x, curY: y }
             })
         }
         else {
-            if(willMove.ready && allSquare[x][y].possibleToMove) {
+            if (willMove.ready && allSquare[x][y].possibleToMove) {
                 this.defaultPossibleToMove();
                 allSquare[x][y].currentPiece = willMove.piece;
                 allSquare[x][y].pieceColor = willMove.color;
@@ -156,34 +157,35 @@ export default class Board extends Component {
                 allSquare[willMove.curX][willMove.curY].pieceColor = ''
                 willMove.ready = false;
                 this.setState({
-                    allSquare: allSquare
+                    allSquare: allSquare,
+                    whiteTurn: !whiteTurn
                 })
             }
         }
-          
+
     }
 
 
 
-    render(){
-        const { allSquare, willMove } = this.state;
+    render() {
+        const { allSquare, willMove, whiteTurn } = this.state;
         console.log(willMove)
-        return(
-            <div className="board">
-                <h1>Chess</h1>
+        return (
+            <div className={whiteTurn? "board":"board rotate"}>
                 {allSquare.length > 0 && allSquare.map((item, x) => (
                     <div key={x} className="thefile">
                         {allSquare[x].map((item2, y) => {
-                            return <Square 
-                                    key={item2.positions}
-                                    item={item2}
-                                    choosing={willMove}
-                                    choosePieceToMove={() => this.choosePieceToMove(item2.position, item2.currentPiece, item2.pieceColor, x, y)}
-                                    color={(x % 2 === 0 && y % 2 === 0) || (x % 2 !== 0 && y % 2 !== 0)? "white":"black"} 
-                                />
+                            return <Square
+                                key={item2.positions}
+                                item={item2}
+                                choosing={willMove}
+                                whiteTurn={whiteTurn}
+                                choosePieceToMove={() => this.choosePieceToMove(item2.position, item2.currentPiece, item2.pieceColor, x, y)}
+                                color={(x % 2 === 0 && y % 2 === 0) || (x % 2 !== 0 && y % 2 !== 0) ? "white" : "black"}
+                            />
                         })}
                     </div>
-                    
+
                 ))}
             </div>
         )
