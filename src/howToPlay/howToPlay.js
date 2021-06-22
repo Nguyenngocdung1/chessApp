@@ -12,7 +12,7 @@ export const pieceMove = (x, y, curX, curY, pie, allSquare) => {
 
             }
             for (let i = 1; i <= 7; i++) {
-                if (allSquare[curX - i][curY] === undefined || allSquare[curX - i][curY].currentPiece) break;
+                if (allSquare[curX - i] === undefined || allSquare[curX - i][curY].currentPiece) break;
                 else possiblePoints.push({ a: curX - i, b: curY });
 
             }
@@ -109,7 +109,7 @@ export const pieceMove = (x, y, curX, curY, pie, allSquare) => {
 
                 }
                 for (let i = 1; i <= 7; i++) {
-                    if (allSquare[curX - i][curY] === undefined || allSquare[curX - i][curY].currentPiece) break;
+                    if (allSquare[curX - i] === undefined || allSquare[curX - i][curY].currentPiece) break;
                     else possiblePoints.push({ a: curX - i, b: curY });
 
                 }

@@ -19,6 +19,7 @@
 .imgButton {
     width: 100%;
     text-align: center;
+    transition: transform 2s;
 }
 
 .rotate {
