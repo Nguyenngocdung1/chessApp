@@ -158,7 +158,7 @@ export default class Board extends Component {
                 willMove.ready = false;
                 this.setState({
                     allSquare: allSquare,
-                    whiteTurn: !whiteTurn
+                    // whiteTurn: !whiteTurn
                 })
             }
         }
