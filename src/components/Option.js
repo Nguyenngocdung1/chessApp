@@ -3,9 +3,13 @@ import '../static/Home.css';
 import BackdropFilter from 'react-backdrop-filter';
 
 import option1 from '../static/images/vsAi.jpg';
-import option2 from '../static/images/vsHuman.jpg';
+import option2 from '../static/images/vshuman.jpeg';
 import option3 from '../static/images/history.jpg';
 import option4 from '../static/images/learnChess.jpg';
+
+import {
+    Link
+} from "react-router-dom";
 
 
 export default class Option extends Component {
@@ -45,7 +49,7 @@ export default class Option extends Component {
             }
             case 'option3': {
                 imgOption = option3;
-                title = 'Play with AI'
+                title = 'History'
                 break;
             }
             case 'option4': {
@@ -53,18 +57,21 @@ export default class Option extends Component {
                 title = 'Learn to play chess'
                 break;
             }
+            default: imgOption = '';
         }
         console.log(this.state.hovering + this.state.optionHovering)
         return <BackdropFilter 
             className={'option ' + itsClass} 
-            filter={"blur(20px)"} 
+            filter={"blur(10px)"} 
         >
-            <button onMouseEnter={() => this.setTrueHovering(itsClass)} onMouseLeave={this.setFalseHovering}>
-                <img src={imgOption} className={itsClass === this.state.optionHovering? 'hover-img':'unhover-img'} />
-                <div>
-                    <h3>{title}</h3>
-                </div>
-            </button>
+            <Link to="/playwithai">
+                <button onMouseEnter={() => this.setTrueHovering(itsClass)} onMouseLeave={this.setFalseHovering}>
+                    <img src={imgOption} className={itsClass === this.state.optionHovering? 'hover-img':'unhover-img'} alt='option' />
+                    <div>
+                        <h3>{title}</h3>
+                    </div>
+                </button>
+            </Link>
         </BackdropFilter>
     }
 }

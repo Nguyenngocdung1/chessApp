@@ -15,11 +15,12 @@ export default class ProfileHome extends Component {
 
     render() {
         const { elo } = this.state;
-        return <BackdropFilter className='profile' filter={"blur(20px)"}>
-            <img src={avtimg} />
+        return <BackdropFilter className='profile' filter={"blur(10px)"}>
+            <img src={avtimg} alt='avtimg' />
             <div>
                 <h3>Peter Parker</h3>
-                <AnimatedNumber value={elo} component="text" 
+                <p>danhuynh1912@gmail.com</p>
+                <AnimatedNumber value={elo} component="text"
                     style={{
                         transition: '1s ease-in-out',
                         color: '#0c0c0caf',
@@ -27,9 +28,9 @@ export default class ProfileHome extends Component {
                         transitionProperty:
                             'background-color, color, opacity'
                     }}
-                    duration={2700} 
+                    duration={2700}
                     formatValue={n => n.toFixed(0)}
-                    />
+                />
             </div>
         </BackdropFilter>
     }

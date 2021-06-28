@@ -9,17 +9,22 @@
 }
 
 .black {
-    background: #262f3b;
+    background: #ababab;
 }
 
 .white {
-    background: #6a7687;
+    background: #dcdcdc;
 }
 
 .imgButton {
     width: 100%;
     text-align: center;
     transition: transform 2s;
+    vertical-align: baseline;
+}
+
+.possible {
+    vertical-align: baseline;
 }
 
 .rotate {
@@ -27,9 +32,9 @@
 }
 
 .choosing {
-    background: #949a44 !important;
+    background: rgb(44, 44, 44);
 }
 
-.possibletomove {
+.possibletomove, .possible {
     opacity: 0.3;
 }

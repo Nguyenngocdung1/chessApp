@@ -1,12 +1,17 @@
 import './App.css';
 
-import Board from './components/Board';
-import Home from './components/Home';
+import ModalSwitch from './components/ModalSwitch';
+
+import {
+    BrowserRouter as Router,
+} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Home />
+      <Router>
+        <ModalSwitch />
+      </Router>
     </div>
   );
 }

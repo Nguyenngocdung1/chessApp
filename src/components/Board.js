@@ -38,6 +38,7 @@ export default class Board extends Component {
                     case 8:
                         color = BLACK_PIECE;
                         break;
+                    default: color = '';
                 }
 
                 switch (position) {
@@ -109,6 +110,7 @@ export default class Board extends Component {
                         pieceDefault = PAWN_B;
                         break;
                     }
+                    default: pieceDefault = '';
                 }
                 return { position: position, currentPiece: pieceDefault, pieceColor: color, possibleToMove: false, x: i, y: index }
             })
@@ -120,10 +122,10 @@ export default class Board extends Component {
     }
 
     defaultPossibleToMove() {
-        const { willMove, allSquare } = this.state;
-        allSquare.map((item, xSquare) => {
-            allSquare[xSquare].map((item2, ySquare) => {
-                if (allSquare[xSquare][ySquare].possibleToMove = true) {
+        const { allSquare } = this.state;
+        allSquare.forEach((item, xSquare) => {
+            allSquare[xSquare].forEach((item2, ySquare) => {
+                if (allSquare[xSquare][ySquare].possibleToMove) {
                     allSquare[xSquare][ySquare].possibleToMove = false
                 }
             })
@@ -131,15 +133,15 @@ export default class Board extends Component {
     }
 
     choosePieceToMove(pos, pie, pieColor, x, y) {
-        const { willMove, allSquare, whiteTurn } = this.state;
+        const { willMove, allSquare } = this.state;
         console.log("COLOR: " + pos);
         if ((!willMove.ready && pie !== '')
             || (pieColor === willMove.color && pos !== willMove.position && pieColor !== '')) {
             this.defaultPossibleToMove();
-            allSquare.map((item, xSquare) => {
-                allSquare[xSquare].map((item2, ySquare) => {
+            allSquare.forEach((item, xSquare) => {
+                allSquare[xSquare].forEach((item2, ySquare) => {
                     if ((pieceMove(xSquare, ySquare, x, y, pie, allSquare) && pie !== KNIGHT_B && pie !== KNIGHT_W)
-                        || (pieceMove(xSquare, ySquare, x, y, pie, allSquare) && (pie == KNIGHT_B || pie == KNIGHT_W) && pieColor !== item2.pieceColor)) {
+                        || (pieceMove(xSquare, ySquare, x, y, pie, allSquare) && (pie === KNIGHT_B || pie === KNIGHT_W) && pieColor !== item2.pieceColor)) {
                         allSquare[xSquare][ySquare].possibleToMove = true;
                     }
                 })
@@ -153,8 +155,8 @@ export default class Board extends Component {
                 this.defaultPossibleToMove();
                 allSquare[x][y].currentPiece = willMove.piece;
                 allSquare[x][y].pieceColor = willMove.color;
-                allSquare[willMove.curX][willMove.curY].currentPiece = ''
-                allSquare[willMove.curX][willMove.curY].pieceColor = ''
+                allSquare[willMove.curX][willMove.curY].currentPiece = '';
+                allSquare[willMove.curX][willMove.curY].pieceColor = '';
                 willMove.ready = false;
                 this.setState({
                     allSquare: allSquare,
