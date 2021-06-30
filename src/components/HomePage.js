@@ -5,8 +5,9 @@ import '../static/Home.css';
 
 import Nav from './Nav';
 import MainOption from './MainOption';
+import FriendsListHome from './FriendsListHome';
 
-export default class Home extends Component {
+export default class HomePage extends Component {
     constructor() {
         super();
     }
@@ -21,11 +22,11 @@ export default class Home extends Component {
                 </BackdropFilter>
             </div>
             <div className='row'>
-                <div className='col-7'>
+                <div className='col-8'>
                     <MainOption />
                 </div>
-                <div className='col-5'>
-                    <h1>assad</h1>
+                <div className='col-4'>
+                    <FriendsListHome />
                 </div>
             </div>
         </div>

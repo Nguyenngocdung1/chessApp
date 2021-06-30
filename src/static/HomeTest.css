@@ -5,7 +5,7 @@
     background-repeat: no-repeat;
     background-position: center;
     padding: 40px;
-    margin-bottom: 25px
+    margin: 25px 0
 }
 
 .intro-title {
@@ -56,12 +56,16 @@
     margin-bottom: 20px;
 }
 
-.main-option {
+.main-option, .friend {
     box-shadow: 0 3px 7px 0px rgb(0 8 5 / 5%);
     width: 100%;
     background: #fff;
     border-radius: 5px;
     padding: 20px
+}
+
+.main-option h5 {
+    margin-bottom: 25px;
 }
 
 .option-main {
@@ -91,4 +95,74 @@
 
 .an-option a{
     text-decoration: none;
+}
+
+.friend h5 {
+    margin-bottom: 25px;
+    color: black
+}
+
+.friend-avt {
+    margin-bottom: 25px
+}
+
+.friend-info {
+    display: flex;
+    margin-bottom: 20px
+}
+
+.friend-info p {
+    color: black;
+    margin: 20px 10px 0 0;
+}
+
+.friend-number {
+    width: 18px;
+}
+
+.friend-avt img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 7px;
+    margin-right: 10px;
+}
+
+@media (min-width: 1280px) and (max-width: 1380px) {
+    .navigation {
+        padding: 30px 10px 30px 20px !important;
+    }
+    
+    .navigation span {
+        font-size: 15px;
+    }
+
+    .intro-title {
+        width: 50%;
+    }
+
+    .img-intro h1 {
+        font-size: 70px;
+    }
+}
+
+@media (min-width: 1381px) and (max-width: 1560px) {
+    .navigation {
+        padding: 30px 10px 30px 32px !important;
+    }
+
+    .intro-title {
+        width: 45%;
+    }
+
+    .img-intro h1 {
+        font-size: 70px;
+    }
+}
+
+@media (min-width: 1650px) and (max-width: 1920px) {
+    .an-option img {
+        width: 150px;
+        height: 150px;
+    }
 }

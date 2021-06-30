@@ -1,40 +1,25 @@
 import React, { Component } from 'react';
 import anime from 'animejs/lib/anime.es.js';
-import '../static/Home.css';
+import '../static/HomeTest.css';
 
-import ProfileHome from './ProfileHome';
-import Option from './Option';
+import Nav from './Nav';
+import HomePage from './HomePage';
 
 export default class Home extends Component {
     constructor() {
         super();
-
-        this.option1Ref = React.createRef();
-        this.option2Ref = React.createRef();
-        this.option3Ref = React.createRef();
-        this.option4Ref = React.createRef();
-    }
-
-    componentDidMount() {
-        this.option1Ref.current = anime({
-            targets: ".option1",
-            translateY: 0,
-            delay: function(el, i) {
-                return i * 100;
-            },
-            direction: "alternate",
-            easing: "easeInOutSine"
-        });
     }
 
     render() {
-        return <div className='background-home'>
-            <div className='content container'>
-                <ProfileHome />
-                <Option itsClass='option1' ref={this.option1Ref} />
-                <Option itsClass='option2' ref={this.option2Ref} />
-                <Option itsClass='option3' ref={this.option3Ref} />
-                <Option itsClass='option4' ref={this.option4Ref} />
+        return <div className='row home'>
+            <div className='col-2 nav-home'>
+                <Nav />
+            </div>
+            <div className='col-10'>
+                {/* <div className=''>
+                    <h1>ádasd</h1>
+                </div> */}
+                <HomePage />
             </div>
         </div>
     }

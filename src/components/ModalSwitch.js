@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import '../static/Home.css';
 
 import PlayWithHuman from './PlayWithHuman';
-import Home from './Home';
-import HomeTest from './HomeTest';
+import HomeTest from './Home';
 
 import {
     Switch,

@@ -6,10 +6,6 @@ import humanHome from '../static/images/humanHome.svg';
 import aiHome from '../static/images/aiHome.svg';
 import lessonHome from '../static/images/lessonHome.svg';
 
-import ProfileHome from './ProfileHome';
-import Option from './Option';
-import HomeTest from './HomeTest';
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -58,17 +54,17 @@ export default class Nav extends Component {
                 </ul>
             </nav>
                 
-                <Switch>
+                {/* <Switch>
                     <Route path="/about">
                         <ProfileHome />
                     </Route>
                     <Route path="/users">
                         <Option />
-                    </Route>
+                    </Route> */}
                     {/* <Route path="/">
                         <HomeTest />
                     </Route> */}
-                </Switch>
+                {/* </Switch> */}
             </div>
         </Router>
     }
