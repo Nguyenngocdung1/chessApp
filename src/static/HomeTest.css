@@ -1,0 +1,94 @@
+.img-intro {
+    height: 400px;
+    background-image: url('./images/homeBackground5.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 40px;
+    margin-bottom: 25px
+}
+
+.intro-title {
+    box-shadow:
+    0 20.8px 5.4px -24px rgba(0, 0, 0, 0.076),
+    0 35.4px 14.3px -24px rgba(0, 0, 0, 0.092),
+    0 45.1px 28.4px -24px rgba(0, 0, 0, 0.091),
+    0 52.1px 51.9px -24px rgba(0, 0, 0, 0.086),
+    0 61.3px 94.5px -24px rgba(0, 0, 0, 0.078),
+    0 100px 174px -24px rgba(0, 0, 0, 0.07)
+  ;
+    border-bottom: 1px solid #ffffff3a;
+    border-right: 1px solid #ffffff3a;
+    border-left: 1px solid #ffffff67;
+    border-top: 1px solid #ffffff67;
+    border-radius: 10px;
+    background: #ffffff21;
+    width: 40%;
+    height: 100%;
+    padding: 40px
+}
+
+.img-intro h1 {
+    font-weight: 600;
+    font-size: 80px;
+    color: #404f63;
+    margin: 0
+}
+
+.img-intro p {
+    margin-left: 10px;
+    font-size: 22px;
+    opacity: .7;
+}
+
+.home {
+    width: 100%
+}
+
+.intro-button {
+    width: 50%;
+    border: none;
+    background: #5b78e2;
+    color: white;
+    height: 50px;
+    box-shadow: 0 3px 7px 0px rgb(0 8 5 / 12%);
+    border-radius: 90px;
+    margin-bottom: 20px;
+}
+
+.main-option {
+    box-shadow: 0 3px 7px 0px rgb(0 8 5 / 5%);
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px
+}
+
+.option-main {
+    margin: 15px 0;
+}
+
+.an-option {
+    text-align: center;
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    padding-top: 20px;
+}
+
+.an-option img{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.an-option p{
+    font-weight: 600;
+    font-size: 21px;
+    color: #404f63;
+}
+
+.an-option a{
+    text-decoration: none;
+}

@@ -3,6 +3,7 @@ import '../static/Home.css';
 
 import PlayWithHuman from './PlayWithHuman';
 import Home from './Home';
+import HomeTest from './HomeTest';
 
 import {
     Switch,
@@ -13,7 +14,7 @@ export default class ModalSwitch extends Component {
     render() {
         return <Switch>
             <Route exact path="/">
-                <Home />
+                <HomeTest />
             </Route>
             <Route path="/playwithai" children={<PlayWithHuman />} />
         </Switch>
