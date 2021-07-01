@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import anime from 'animejs/lib/anime.es.js';
 import BackdropFilter from 'react-backdrop-filter';
-import '../static/Home.css';
 
-import Nav from './Nav';
 import MainOption from './MainOption';
+import HistoryHome from './HistoryHome';
 import FriendsListHome from './FriendsListHome';
 
 export default class HomePage extends Component {
@@ -24,6 +22,7 @@ export default class HomePage extends Component {
             <div className='row'>
                 <div className='col-8'>
                     <MainOption />
+                    <HistoryHome />
                 </div>
                 <div className='col-4'>
                     <FriendsListHome />

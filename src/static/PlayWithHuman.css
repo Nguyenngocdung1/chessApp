@@ -11,52 +11,53 @@
     box-shadow: 0 3px 7px 0px rgb(0 8 5 / 12%);
 }
 
-.timecount {
-    height: 40%;
-    border-radius: 10px;
-    text-align: center;
-    padding-top: 30px;
-    box-shadow: 0 3px 7px 0px rgb(0 8 5 / 12%);
+.time {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    padding: 15px;
+    position: relative;
+    border-radius: 5px;
 }
 
-.timecount img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.timecount h4 {
-    text-align: center;
-}
-
-.your-turn {
+.your-time {
     background: #e6ecf0;
 }
 
-.opponent-turn {
-    background: #feefec;
-    margin: 20px 0 20px 0;
-}
-
-.time {
-    font-weight: 600;
-    font-size: 50px;
-    text-align: center;
-    padding-top: 20px
-}
-
-.opponent-time h1, .your-time h1{
-    font-size: 50px;
-    font-weight: 600;
-}
-
-.opponent-time h1{
+.opponent-time h5{
     color: #b98f86;
 }
 
-.your-time h1{
+.your-time h5{
     color: #849cad;
+}
+
+.opponent-time {
+    background: #feefec;
+}
+
+.time p {
+    font-weight: 600;
+    opacity: .5;
+}
+
+.time h5 {
+    font-weight: 600;
+    font-size: 35px;
+    margin: 0;
+}
+
+.time img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.time-count {
+    position: absolute;
+    right: 15px;
 }
 
 .center-board {
@@ -65,7 +66,7 @@
 
 .setup-game {
     box-shadow: 0 3px 7px 0px rgb(0 8 5 / 12%);
-    border-radius: 10px;
+    border-radius: 5px;
     background: white;
     height: 100%;
     padding: 15px

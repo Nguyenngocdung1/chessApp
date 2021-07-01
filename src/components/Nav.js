@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import anime from 'animejs/lib/anime.es.js';
+
 import '../static/Nav.css';
+
 import homeHome from '../static/images/homeHome.svg';
 import humanHome from '../static/images/humanHome.svg';
 import aiHome from '../static/images/aiHome.svg';
@@ -19,13 +20,12 @@ export default class Nav extends Component {
     }
 
     render() {
-        return <Router>
-        <div className='navigation'>
+        return <div className='navigation'>
             <div className='logo'>
                 <h2>ChessApp</h2>
             </div>
             <nav>
-                <p className='menu-title'>menu</p>
+                <p className='menu-title'>Menu</p>
                 <ul>
                     <li>
                         <Link to="/">
@@ -34,7 +34,7 @@ export default class Nav extends Component {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/about">
+                        <Link to="/playwithai">
                             <img src={humanHome} />
                             <span>Play with human</span>
                         </Link>
@@ -53,19 +53,6 @@ export default class Nav extends Component {
                     </li>
                 </ul>
             </nav>
-                
-                {/* <Switch>
-                    <Route path="/about">
-                        <ProfileHome />
-                    </Route>
-                    <Route path="/users">
-                        <Option />
-                    </Route> */}
-                    {/* <Route path="/">
-                        <HomeTest />
-                    </Route> */}
-                {/* </Switch> */}
-            </div>
-        </Router>
+        </div>
     }
 }

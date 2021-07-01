@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import anime from 'animejs/lib/anime.es.js';
 
 import option1 from '../static/images/vsAi.jpg';
 import option2 from '../static/images/vshuman.jpeg';
