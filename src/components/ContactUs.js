@@ -1,10 +1,4 @@
 import React, { Component } from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
 
 import facebook from '../static/images/facebook.svg';
 import instagram from '../static/images/instagram.svg';
@@ -17,10 +11,10 @@ export default class ContactUs extends Component {
         return <div className='contact'>
             <h5>Contact</h5>
             <div className='social'>
-                <a href=''><img src={facebook} /></a>
-                <a href=''><img src={instagram} /></a>
-                <a href=''><img src={github} /></a>
-                <a href=''><img src={twitter} /></a>
+                <a href="#a"><img src={facebook} alt=""/></a>
+                <a href='#a'><img src={instagram} alt=""/></a>
+                <a href='#a'><img src={github} alt=""/></a>
+                <a href='#a'><img src={twitter} alt=""/></a>
             </div>
                 
         </div>

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import anime from 'animejs/lib/anime.es.js';
 import '../static/HomeTest.css';
 
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
-    Link
 } from "react-router-dom";
 
 import Nav from './Nav';
@@ -15,10 +12,6 @@ import PlayWithHuman from './PlayWithHuman';
 import ArticlesList from './ArticlesList';
 
 export default class Home extends Component {
-    constructor() {
-        super();
-    }
-
     render() {
         return <div className='row home'>
             <div className='col-2 nav-home'>

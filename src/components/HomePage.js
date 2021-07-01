@@ -7,10 +7,6 @@ import ContactUs from './ContactUs';
 import FriendsListHome from './FriendsListHome';
 
 export default class HomePage extends Component {
-    constructor() {
-        super();
-    }
-
     render() {
         return <div className=''>
             <div className='img-intro'>
