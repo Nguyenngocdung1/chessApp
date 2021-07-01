@@ -12,6 +12,7 @@ import {
 import Nav from './Nav';
 import HomePage from './HomePage';
 import PlayWithHuman from './PlayWithHuman';
+import ArticlesList from './ArticlesList';
 
 export default class Home extends Component {
     constructor() {
@@ -30,6 +31,9 @@ export default class Home extends Component {
                     </Route>
                     <Route path="/users">
                         <HomePage />
+                    </Route>
+                    <Route path="/articles">
+                        <ArticlesList />
                     </Route>
                     <Route path="/">
                         <HomePage />

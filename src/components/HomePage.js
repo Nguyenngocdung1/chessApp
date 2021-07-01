@@ -3,6 +3,7 @@ import BackdropFilter from 'react-backdrop-filter';
 
 import MainOption from './MainOption';
 import HistoryHome from './HistoryHome';
+import ContactUs from './ContactUs';
 import FriendsListHome from './FriendsListHome';
 
 export default class HomePage extends Component {
@@ -26,6 +27,7 @@ export default class HomePage extends Component {
                 </div>
                 <div className='col-4'>
                     <FriendsListHome />
+                    <ContactUs />
                 </div>
             </div>
         </div>

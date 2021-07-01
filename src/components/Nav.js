@@ -6,6 +6,7 @@ import homeHome from '../static/images/homeHome.svg';
 import humanHome from '../static/images/humanHome.svg';
 import aiHome from '../static/images/aiHome.svg';
 import lessonHome from '../static/images/lessonHome.svg';
+import article from '../static/images/article.svg';
 
 import {
     BrowserRouter as Router,
@@ -40,15 +41,21 @@ export default class Nav extends Component {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/users">
+                        <Link to="/playwithai">
                             <img src={aiHome} />
                             <span>Play with AI</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/users">
+                        <Link to="/lesson">
                             <img src={lessonHome} />
                             <span>Lesson</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/articles">
+                            <img src={article} />
+                            <span>Article</span>
                         </Link>
                     </li>
                 </ul>
