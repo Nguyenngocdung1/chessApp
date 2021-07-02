@@ -13,10 +13,10 @@ export default class Lesson extends Component {
         this.state = {
             isShowing: false,
             levels: [
-                { imgLink: 'https://source.unsplash.com/300x225/?wave', level: 'New to Chess', info: info, show: false },
-                { imgLink: 'https://source.unsplash.com/300x225/?beach', level: 'Beginner', info: info, show: false },
-                { imgLink: 'https://source.unsplash.com/300x225/?desert', level: 'Intermediate', info: info, show: false },
-                { imgLink: 'https://source.unsplash.com/300x225/?mountain', level: 'Advanced', info: info, show: false },
+                { imgLink: 'https://source.unsplash.com/300x225/?chess', level: 'New to Chess', info: info, show: false },
+                { imgLink: 'https://source.unsplash.com/300x225/?chess', level: 'Beginner', info: info, show: false },
+                { imgLink: 'https://source.unsplash.com/300x225/?chess', level: 'Intermediate', info: info, show: false },
+                { imgLink: 'https://source.unsplash.com/300x225/?chess', level: 'Advanced', info: info, show: false },
             ]
         }
     }
