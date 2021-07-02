@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import anime from 'animejs/lib/anime.es.js';
 import '../static/HomeTest.css';
 
 import {
@@ -13,6 +12,7 @@ import Nav from './Nav';
 import HomePage from './HomePage';
 import PlayWithHuman from './PlayWithHuman';
 import ArticlesList from './ArticlesList';
+import Lesson from './Lesson';
 
 export default class Home extends Component {
     constructor() {
@@ -34,6 +34,9 @@ export default class Home extends Component {
                     </Route>
                     <Route path="/articles">
                         <ArticlesList />
+                    </Route>
+                    <Route path="/lesson">
+                        <Lesson />
                     </Route>
                     <Route path="/">
                         <HomePage />

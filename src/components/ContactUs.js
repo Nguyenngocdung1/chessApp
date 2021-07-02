@@ -1,10 +1,4 @@
 import React, { Component } from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
 
 import facebook from '../static/images/facebook.svg';
 import instagram from '../static/images/instagram.svg';
