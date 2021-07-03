@@ -10,6 +10,7 @@ import Nav from './Nav';
 import HomePage from './HomePage';
 import PlayWithHuman from './PlayWithHuman';
 import ArticlesList from './ArticlesList';
+import Lesson from './Lesson';
 
 export default class Home extends Component {
     render() {
@@ -27,6 +28,9 @@ export default class Home extends Component {
                     </Route>
                     <Route path="/articles">
                         <ArticlesList />
+                    </Route>
+                    <Route path="/lesson">
+                        <Lesson />
                     </Route>
                     <Route path="/">
                         <HomePage />
