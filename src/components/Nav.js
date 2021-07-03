@@ -9,17 +9,10 @@ import lessonHome from '../static/images/lessonHome.svg';
 import article from '../static/images/article.svg';
 
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link
 } from "react-router-dom";
 
 export default class Nav extends Component {
-    constructor() {
-        super();
-    }
-
     render() {
         return <div className='navigation'>
             <div className='logo'>
@@ -30,31 +23,31 @@ export default class Nav extends Component {
                 <ul>
                     <li>
                         <Link to="/">
-                            <img src={homeHome} />
+                            <img src={homeHome} alt="" />
                             <span>Home</span>
                         </Link>
                     </li>
                     <li>
                         <Link to="/playwithai">
-                            <img src={humanHome} />
+                            <img src={humanHome} alt=""/>
                             <span>Play with human</span>
                         </Link>
                     </li>
                     <li>
                         <Link to="/playwithai">
-                            <img src={aiHome} />
+                            <img src={aiHome} alt="" />
                             <span>Play with AI</span>
                         </Link>
                     </li>
                     <li>
                         <Link to="/lesson">
-                            <img src={lessonHome} />
+                            <img src={lessonHome} alt="" />
                             <span>Lesson</span>
                         </Link>
                     </li>
                     <li>
                         <Link to="/articles">
-                            <img src={article} />
+                            <img src={article} alt="" />
                             <span>Article</span>
                         </Link>
                     </li>

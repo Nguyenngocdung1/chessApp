@@ -62,7 +62,7 @@ export default class Lesson extends Component {
                                 <img class="card__image" src={item.imgLink} alt="wave" />
                             </div>
                             <div class="card-title">
-                                <a class="toggle-info btn" onClick={() => this.showInfomation(index)} >
+                                <a href="#m" class="toggle-info btn" onClick={() => this.showInfomation(index)} >
                                     <span class="left"></span>
                                     <span class="right"></span>
                                 </a>
@@ -77,7 +77,7 @@ export default class Lesson extends Component {
                                 </div>
                                 <div class="card-flap flap2">
                                     <div class="card-actions">
-                                        <a href="#" class="btn">Learn now</a>
+                                        <a href="#m" class="btn">Learn now</a>
                                     </div>
                                 </div>
                             </div>

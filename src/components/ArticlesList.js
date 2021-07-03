@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
 import '../static/ArticlesList.css';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
 
 import ContactUs from './ContactUs';
 import FriendsListHome from './FriendsListHome';
@@ -91,7 +85,7 @@ export default class ArticlesList extends Component {
                 <div className='main-articles-list'>
                     <div className='first-article row'>
                         <div className='col-7 first-img'>
-                            <img src={articles[0].img} />
+                            <img src={articles[0].img} alt=""/>
                         </div>
                         <div className='first-title title-info col-5'>
                             <a href={articles[0].link}>
@@ -109,7 +103,7 @@ export default class ArticlesList extends Component {
                             if (index !== 0) {
                                 return <div className='col-4 article-item'>
                                     <a href={item.link}>
-                                        <img src={item.img} />
+                                        <img src={item.img} alt="" />
                                         <div className='title-info'>
                                             <p className='created-time'>Jun 29, 2021</p>
                                             <h4 className='article-title'>
@@ -120,6 +114,7 @@ export default class ArticlesList extends Component {
                                     </a>
                                 </div>
                             }
+                            return null;
                         })}
                     </div>
                 </div>

@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import '../static/HomeTest.css';
 
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
-    Link
 } from "react-router-dom";
 
 import Nav from './Nav';
@@ -16,10 +14,6 @@ import ArticlesList from './ArticlesList';
 import Lesson from './Lesson';
 
 export default class Home extends Component {
-    constructor() {
-        super();
-    }
-
     render() {
         return <div className='row home'>
             <div className='col-2 nav-home'>
