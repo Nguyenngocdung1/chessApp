@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 
 export default class HistoryHome extends Component {
-    constructor() {
-        super();
-    }
-
     render() {
         const games = [
             { opponent: 'danhuynh', result: 'win', moves: '26', date: 'Jun 29, 2021' },

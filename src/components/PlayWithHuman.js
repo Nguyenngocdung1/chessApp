@@ -23,14 +23,14 @@ export default class PlayWithHuman extends Component {
                 <div className='col-4'>
                     <div className='setup-game'>
                         <div className='time opponent-time'>
-                            <img src={opponentAvatar} />
+                            <img src={opponentAvatar} alt="" />
                             <p className='friend-name'>Opponent</p>
                             <div className='time-count'>
                                 <h5>30:00</h5>
                             </div>
                         </div>
                         <div className='time your-time'>
-                            <img src={avt} />
+                            <img src={avt} alt="" />
                             <p className='friend-name'>You</p>
                             <div className='time-count'>
                                 <h5>30:00</h5>
@@ -39,15 +39,15 @@ export default class PlayWithHuman extends Component {
                         <button className='play-button'>Play</button>
                         <div className='three-option'>
                             <div className='anoption'>
-                                <img src={setup} width='23px' />
+                                <img src={setup} width='23px' alt="" />
                                 <Link to=''>Game setup</Link>
                             </div>
                             <div className='anoption'>
-                                <img src={seehistory} width='23px' />
+                                <img src={seehistory} width='23px' alt="" />
                                 <Link to=''>See history</Link>
                             </div>
                             <div className='anoption'>
-                                <img src={back1} width='23px' />
+                                <img src={back1} width='23px' alt="" />
                                 <Link to=''>Back</Link>
                             </div>
                         </div>
