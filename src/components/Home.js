@@ -11,6 +11,7 @@ import {
 import Nav from './Nav';
 import HomePage from './HomePage';
 import PlayWithHuman from './PlayWithHuman';
+import ChoseLevelAi from './ChoseLevelAi';
 import ArticlesList from './ArticlesList';
 import Lesson from './Lesson';
 
@@ -26,8 +27,11 @@ export default class Home extends Component {
             </div>
             <div className='col-10'>
                 <Switch>
-                    <Route path="/playwithai">
+                    <Route path="/playwithhuman">
                         <PlayWithHuman />
+                    </Route>
+                    <Route path="/playwithai">
+                        <ChoseLevelAi />
                     </Route>
                     <Route path="/users">
                         <HomePage />
