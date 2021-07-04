@@ -9,9 +9,14 @@ import {
 import Nav from './Nav';
 import HomePage from './HomePage';
 import PlayWithHuman from './PlayWithHuman';
+import PlayWithAI from './PlayWithAI';
 import ChoseLevelAi from './ChoseLevelAi';
 import ArticlesList from './ArticlesList';
 import Lesson from './Lesson';
+
+// container
+
+import ChoseLevelAiContainer from '../container/ChoseLevelAiContainer';
 
 export default class Home extends Component {
     render() {
@@ -25,7 +30,10 @@ export default class Home extends Component {
                         <PlayWithHuman />
                     </Route>
                     <Route path="/playwithai">
-                        <ChoseLevelAi />
+                        <ChoseLevelAiContainer />
+                    </Route>
+                    <Route path="/gamewithai">
+                        <PlayWithAI />
                     </Route>
                     <Route path="/users">
                         <HomePage />
