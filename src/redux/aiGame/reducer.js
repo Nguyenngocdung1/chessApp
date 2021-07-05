@@ -1,4 +1,5 @@
 import { ADD_GAME } from './actionType';
+import { FINISH_GAME } from './actionType';
 
 const aiGameInitState = {
     aiGames: []
@@ -7,10 +8,20 @@ const aiGameInitState = {
 const aiGameReducer = (state = aiGameInitState, action) => {
     switch(action.type) {
         case ADD_GAME: {
-            let _state = state;
-            _state.aiGames.push(action.payload);
-            return _state
+            return {
+                ...state,
+                aiGames: [
+                    action.payload,
+                    ...state.aiGames
+                ]
+            }
         }
+        // case FINISH_GAME: {
+        //     return {
+        //         ...state,
+
+        //     }
+        // }
         default: {
             return state;
         }
