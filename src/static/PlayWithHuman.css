@@ -1,4 +1,4 @@
-.humanplay {
+.humanplay, .aiplay {
     padding-top: 25px
 }
 
@@ -38,6 +38,11 @@
 
 .time p {
     font-weight: 600;
+    opacity: .5;
+    font-size: 25px;
+}
+
+.time span {
     opacity: .5;
 }
 

@@ -16,12 +16,15 @@ const aiGameReducer = (state = aiGameInitState, action) => {
                 ]
             }
         }
-        // case FINISH_GAME: {
-        //     return {
-        //         ...state,
-
-        //     }
-        // }
+        case FINISH_GAME: {
+            return {
+                ...state,
+                aiGames: [
+                    action.payload,
+                    ...state.aiGames.slice(1)
+                ]
+            }
+        }
         default: {
             return state;
         }

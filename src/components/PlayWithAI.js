@@ -15,6 +15,7 @@ import {
 
 export default class PlayWithAI extends Component {
     render() {
+        const { aiGames } = this.props;
         return <div className='aiplay'>
             <div className='row'>
                 <div className='col-8 center-board'>
@@ -24,16 +25,19 @@ export default class PlayWithAI extends Component {
                     <div className='setup-game'>
                         <div className='time opponent-time'>
                             <img src={opponentAvatar} alt="" />
-                            <p className='friend-name'>Computer</p>
+                            <div>
+                                <p className='friend-name'>Computer</p>
+                                <span>{aiGames.length > 0 && aiGames[0].level}</span>
+                            </div>
                             <div className='time-count'>
-                                <h5>30:00</h5>
+                                <h5>{ aiGames.length > 0 && aiGames[0].time + ":00" }</h5>
                             </div>
                         </div>
                         <div className='time your-time'>
                             <img src={avt} alt="" />
                             <p className='friend-name'>You</p>
                             <div className='time-count'>
-                                <h5>30:00</h5>
+                                <h5>{ aiGames.length > 0 && aiGames[0].time + ":00" }</h5>
                             </div>
                         </div>
                         <button className='play-button'>Play</button>

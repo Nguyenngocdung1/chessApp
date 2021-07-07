@@ -132,8 +132,13 @@ export default class Board extends Component {
         })
     }
 
+    // aiMoveRandom() {
+    //     const { willMove, allSquare, whiteTurn } = this.state;
+
+    // }
+
     choosePieceToMove(pos, pie, pieColor, x, y) {
-        const { willMove, allSquare } = this.state;
+        const { willMove, allSquare, whiteTurn } = this.state;
         console.log("COLOR: " + pos);
         if ((!willMove.ready && pie !== '')
             || (pieColor === willMove.color && pos !== willMove.position && pieColor !== '')) {
@@ -160,7 +165,7 @@ export default class Board extends Component {
                 willMove.ready = false;
                 this.setState({
                     allSquare: allSquare,
-                    // whiteTurn: !whiteTurn
+                    whiteTurn: !whiteTurn
                 })
             }
         }

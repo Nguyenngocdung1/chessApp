@@ -7,6 +7,8 @@ import humanHome from '../static/images/humanHome.svg';
 import aiHome from '../static/images/aiHome.svg';
 import lessonHome from '../static/images/lessonHome.svg';
 import article from '../static/images/article.svg';
+import seehistory from '../static/images/seehistory.svg';
+import logout from '../static/images/logout.svg';
 
 import {
     Link
@@ -49,6 +51,29 @@ export default class Nav extends Component {
                         <Link to="/articles">
                             <img src={article} alt="" />
                             <span>Article</span>
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
+            <nav>
+                <p className='menu-title account-menu'>Account</p>
+                <ul>
+                    <li>
+                        <Link to="/profile">
+                            <img src={humanHome} alt="" />
+                            <span>Profile</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/">
+                            <img src={seehistory} alt="" />
+                            <span>History</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/playwithai">
+                            <img src={logout} alt=""/>
+                            <span>Sign out</span>
                         </Link>
                     </li>
                 </ul>
