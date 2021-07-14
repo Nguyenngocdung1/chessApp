@@ -178,7 +178,6 @@ export default class Board extends Component {
 
     randomAI() {
         const { willMove, allSquare, whiteTurn } = this.state;
-        // if(whiteTurn){
         let possibleMovesRandomPiece = [];
         let AIPieces = [];
         let AIPossiblePiecesToMove = [];
@@ -188,21 +187,22 @@ export default class Board extends Component {
         randomPiece = AIPossiblePiecesToMove[Math.floor(Math.random() * AIPossiblePiecesToMove.length)];
         for (let i = 0; i < allSquare.length; i++) {
             for (let j = 0; j < allSquare[i].length; j++) {
-                if (pieceMove(i, j, randomPiece.x, randomPiece.y, randomPiece.currentPiece, allSquare)) {
+                if (pieceMove(i, j, randomPiece.x, randomPiece.y, randomPiece.currentPiece, allSquare) && allSquare[i][j].pieceColor !== BLACK_PIECE) {
                     possibleMovesRandomPiece.push(allSquare[i][j]);
                 }
             }
         }
         let randomMove = possibleMovesRandomPiece[Math.floor(Math.random() * possibleMovesRandomPiece.length)];
-        this.movePiece(randomMove.x, randomMove.y, randomPiece.x, randomPiece.y);
-        // }
+        this.movePiece(randomMove.x, randomMove.y, randomPiece.x, randomPiece.y, randomPiece.currentPiece, randomPiece.pieceColor);
 
     }
 
-    movePiece(xNew, yNew, xOld, yOld) {
+    movePiece(xNew, yNew, xOld, yOld, newPiece, newColor) {
         const { willMove, allSquare, whiteTurn } = this.state;
-        allSquare[xNew][yNew].currentPiece = willMove.piece;
-        allSquare[xNew][yNew].pieceColor = willMove.color;
+        // allSquare[xNew][yNew].currentPiece = willMove.piece;
+        // allSquare[xNew][yNew].pieceColor = willMove.color;
+        allSquare[xNew][yNew].currentPiece = newPiece;
+        allSquare[xNew][yNew].pieceColor = newColor;
         allSquare[xOld][yOld].currentPiece = '';
         allSquare[xOld][yOld].pieceColor = '';
         willMove.ready = false;
@@ -214,6 +214,7 @@ export default class Board extends Component {
 
     choosePieceToMove(pos, pie, pieColor, x, y) {
         const { willMove, allSquare, whiteTurn } = this.state;
+        let counts = [1000, 2000, 3000];
         console.log("COLOR: " + pos);
         if ((!willMove.ready && pie !== '')
             || (pieColor === willMove.color && pos !== willMove.position && pieColor !== '')) {
@@ -233,9 +234,11 @@ export default class Board extends Component {
         else {
             if (willMove.ready && allSquare[x][y].possibleToMove) {
                 this.defaultPossibleToMove();
-                this.movePiece(x, y, willMove.curX, willMove.curY);
+                this.movePiece(x, y, willMove.curX, willMove.curY, willMove.piece, willMove.color);
                 if(whiteTurn) {
-                    this.randomAI();
+                    setTimeout(() => {
+                        this.randomAI();
+                    }, counts[Math.floor(Math.random() * counts.length)])
                 }
             }
 
@@ -248,7 +251,7 @@ export default class Board extends Component {
         const { allSquare, willMove, whiteTurn } = this.state;
         console.log(allSquare)
         return (
-            <div className={whiteTurn ? "board" : "board rotate"}>
+            <div className="board">
                 {allSquare.length > 0 && allSquare.map((item, x) => (
                     <div key={x} className="thefile">
                         {allSquare[x].map((item2, y) => {
