@@ -14,7 +14,8 @@ export default class Board extends Component {
         this.state = {
             allSquare: [],
             willMove: { piece: '', position: '', ready: false, color: '', curX: '', curY: '' },
-            whiteTurn: true
+            whiteTurn: true,
+            check: ''
         }
     }
 
@@ -121,6 +122,23 @@ export default class Board extends Component {
         })
     }
 
+    componentDidUpdate() {
+        switch(this.checkIfCheckKing()) {
+            case "You": {
+                setTimeout(() => {
+                    alert("You are checked");
+                }, 1000);
+                break
+            }
+            case "Com": {
+                setTimeout(() => {
+                    alert("Computer are checked");
+                }, 1000);
+                break;
+            }
+        }
+    }
+
     defaultPossibleToMove() {
         const { allSquare } = this.state;
         allSquare.forEach((item, xSquare) => {
@@ -152,11 +170,6 @@ export default class Board extends Component {
             allSquare[index].map((item2, index2) => {
                 if (item2.pieceColor === BLACK_PIECE && this.checkIfAiPieceHasPossibleMove(item2)) {
                     AIPieces.push(item2);
-                    console.log("==this is ai pieces==");
-                    console.log(item2);
-                }
-                else {
-                    console.log("notthing")
                 }
             })
         })
@@ -182,25 +195,32 @@ export default class Board extends Component {
         let AIPieces = [];
         let AIPossiblePiecesToMove = [];
         let randomPiece = '';
-        this.getAllPossibleAiPieces(AIPieces);
-        this.filterAIPossiblePiecesToMove(AIPieces, AIPossiblePiecesToMove);
-        randomPiece = AIPossiblePiecesToMove[Math.floor(Math.random() * AIPossiblePiecesToMove.length)];
-        for (let i = 0; i < allSquare.length; i++) {
-            for (let j = 0; j < allSquare[i].length; j++) {
-                if (pieceMove(i, j, randomPiece.x, randomPiece.y, randomPiece.currentPiece, allSquare) && allSquare[i][j].pieceColor !== BLACK_PIECE) {
-                    possibleMovesRandomPiece.push(allSquare[i][j]);
+        let randomMove = '';
+        if(this.checkIfCheckKing() === "Not") {
+            this.getAllPossibleAiPieces(AIPieces);
+            this.filterAIPossiblePiecesToMove(AIPieces, AIPossiblePiecesToMove);
+            randomPiece = AIPossiblePiecesToMove[Math.floor(Math.random() * AIPossiblePiecesToMove.length)];
+            for (let i = 0; i < allSquare.length; i++) {
+                for (let j = 0; j < allSquare[i].length; j++) {
+                    if (pieceMove(i, j, randomPiece.x, randomPiece.y, randomPiece.currentPiece, allSquare) && allSquare[i][j].pieceColor !== BLACK_PIECE) {
+                        possibleMovesRandomPiece.push(allSquare[i][j]);
+                    }
                 }
             }
+            randomMove = possibleMovesRandomPiece[Math.floor(Math.random() * possibleMovesRandomPiece.length)];
+            this.movePiece(randomMove.x, randomMove.y, randomPiece.x, randomPiece.y, randomPiece.currentPiece, randomPiece.pieceColor);
         }
-        let randomMove = possibleMovesRandomPiece[Math.floor(Math.random() * possibleMovesRandomPiece.length)];
-        this.movePiece(randomMove.x, randomMove.y, randomPiece.x, randomPiece.y, randomPiece.currentPiece, randomPiece.pieceColor);
+        else {
+            // alert("Computer Checked!!!");
+            this.setState({
+                whiteTurn: !whiteTurn
+            })
+        }
 
     }
 
     movePiece(xNew, yNew, xOld, yOld, newPiece, newColor) {
         const { willMove, allSquare, whiteTurn } = this.state;
-        // allSquare[xNew][yNew].currentPiece = willMove.piece;
-        // allSquare[xNew][yNew].pieceColor = willMove.color;
         allSquare[xNew][yNew].currentPiece = newPiece;
         allSquare[xNew][yNew].pieceColor = newColor;
         allSquare[xOld][yOld].currentPiece = '';
@@ -212,21 +232,79 @@ export default class Board extends Component {
         })
     }
 
+    controlledSquaresList() {
+        const { willMove, allSquare, whiteTurn } = this.state;
+        let allControlledSquares = [];
+        for (let i = 0; i < allSquare.length; i++) {
+            for (let j = 0; j < allSquare[i].length; j++) {
+                if ((allSquare[i][j].pieceColor === WHITE_PIECE && !whiteTurn) || (allSquare[i][j].pieceColor === BLACK_PIECE && whiteTurn)) {
+                    for (let _i = 0; _i < allSquare.length; _i++) {
+                        for (let _j = 0; _j < allSquare[_i].length; _j++) {
+                            if (pieceMove(_i, _j, allSquare[i][j].x, allSquare[i][j].y, allSquare[i][j].currentPiece, allSquare)) {
+                                allControlledSquares.push(allSquare[_i][_j]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return allControlledSquares;
+    }
+
+    checkIfItemControlled(king) {
+        for (let i = 0; i < this.controlledSquaresList().length; i++) {
+            if(king.x === this.controlledSquaresList()[i].x && king.y === this.controlledSquaresList()[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    checkIfCheckKing() {
+        const { allSquare, whiteTurn } = this.state;
+        for (let i = 0; i < allSquare.length; i++) {
+            for (let j = 0; j < allSquare[i].length; j++) {
+                if (allSquare[i][j].currentPiece === KING_W && whiteTurn && this.checkIfItemControlled(allSquare[i][j])) {
+                    return "You";
+                }
+                else {
+                    if(allSquare[i][j].currentPiece === KING_B && !whiteTurn && this.checkIfItemControlled(allSquare[i][j])) {
+                        return "Com";
+                    }
+                }
+            }
+        }
+        return "Not";
+    }
+
     choosePieceToMove(pos, pie, pieColor, x, y) {
         const { willMove, allSquare, whiteTurn } = this.state;
         let counts = [1000, 2000, 3000];
-        console.log("COLOR: " + pos);
-        if ((!willMove.ready && pie !== '')
-            || (pieColor === willMove.color && pos !== willMove.position && pieColor !== '')) {
-            this.defaultPossibleToMove();
-            allSquare.forEach((item, xSquare) => {
-                allSquare[xSquare].forEach((item2, ySquare) => {
-                    if ((pieceMove(xSquare, ySquare, x, y, pie, allSquare) && pie !== KNIGHT_B && pie !== KNIGHT_W)
-                        || (pieceMove(xSquare, ySquare, x, y, pie, allSquare) && (pie === KNIGHT_B || pie === KNIGHT_W) && pieColor !== item2.pieceColor)) {
-                        allSquare[xSquare][ySquare].possibleToMove = true;
-                    }
+        if (((!willMove.ready && pie !== '')
+        || (pieColor === willMove.color && pos !== willMove.position && pieColor !== ''))
+        ) {
+            if(this.checkIfCheckKing() !== "Not") {
+                // alert("You are checked");
+                this.defaultPossibleToMove();
+                allSquare.forEach((item, xSquare) => {
+                    allSquare[xSquare].forEach((item2, ySquare) => {
+                        if (pieceMove(xSquare, ySquare, x, y, pie, allSquare) && (pie === KING_W || pie === KING_B)) {
+                            allSquare[xSquare][ySquare].possibleToMove = true;
+                        }
+                    })
                 })
-            })
+            }
+            else {
+                allSquare.forEach((item, xSquare) => {
+                    allSquare[xSquare].forEach((item2, ySquare) => {
+                        if ((pieceMove(xSquare, ySquare, x, y, pie, allSquare) && pie !== KNIGHT_B && pie !== KNIGHT_W)
+                            || (pieceMove(xSquare, ySquare, x, y, pie, allSquare) && (pie === KNIGHT_B || pie === KNIGHT_W) && pieColor !== item2.pieceColor)) {
+                            allSquare[xSquare][ySquare].possibleToMove = true;
+                        }
+                    })
+                })
+            }
             this.setState({
                 willMove: { piece: pie, position: pos, ready: true, color: pieColor, curX: x, curY: y }
             })
@@ -238,7 +316,8 @@ export default class Board extends Component {
                 if(whiteTurn) {
                     setTimeout(() => {
                         this.randomAI();
-                    }, counts[Math.floor(Math.random() * counts.length)])
+                    // }, counts[Math.floor(Math.random() * counts.length)])
+                    }, 1000)
                 }
             }
 
@@ -249,7 +328,6 @@ export default class Board extends Component {
 
     render() {
         const { allSquare, willMove, whiteTurn } = this.state;
-        console.log(allSquare)
         return (
             <div className="board">
                 {allSquare.length > 0 && allSquare.map((item, x) => (
