@@ -12,6 +12,7 @@ import PlayWithHuman from './PlayWithHuman';
 import Profile from './Profile';
 import ArticlesList from './ArticlesList';
 import Lesson from './Lesson';
+import HistoryPage from './HistoryPage';
 
 // container
 
@@ -46,6 +47,9 @@ export default class Home extends Component {
                     </Route>
                     <Route path="/profile">
                         <Profile />
+                    </Route>
+                    <Route path="/history">
+                        <HistoryPage />
                     </Route>
                     <Route path="/">
                         <HomePage />

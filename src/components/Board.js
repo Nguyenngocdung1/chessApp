@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import produce from "immer";
-import { setAutoFreeze } from "immer";
 import Square from './Square';
 import '../static/Board.css'
 import { ROOK_B, KNIGHT_B, BISHOP_B, PAWN_B, QUEEN_B, KING_B } from '../Piece';
@@ -9,8 +7,6 @@ import { pieceMove } from '../howToPlay/howToPlay';
 
 const WHITE_PIECE = 'WHITE_PIECE';
 const BLACK_PIECE = 'BLACK_PIECE';
-
-setAutoFreeze(true);
 
 export default class Board extends Component {
     constructor(props) {
@@ -268,7 +264,6 @@ export default class Board extends Component {
                 if (king.x === this.controlledSquaresList()[i].controlledSquares[j].x && king.y === this.controlledSquaresList()[i].controlledSquares[j].y) {
                     attackingPieces.push(this.controlledSquaresList()[i].attackPiece);
                     this.changeAttackingPieces(attackingPieces);
-                    this.getDistanceFromAttackToKing(king, attackingPieces);
                     return true;
                 }
             }
