@@ -60,7 +60,7 @@ export default class ChoseLevelAi extends Component {
                                 <h5 class="fw-600">Level</h5>
                                 <hr class="style-1 mb-4" />
                                 { levels.length > 0 && levels.map((item, index) => <div className={"level " + item.classParent}>
-                                    <img src={item.img} />
+                                    <img src={item.img} alt={item.level} />
                                     <div className={"level-title " + item.classChild}>
                                         <p>{item.level}</p>
                                     </div>
@@ -84,7 +84,7 @@ export default class ChoseLevelAi extends Component {
                                     <div class="card card-body timecount"  onClick={() => this.getTime(item.time)}>
                                         <div class="content_head">{item.time}</div>
                                         <div class="content_sub">minute</div>
-                                        <img src={choseTime} />
+                                        <img src={choseTime} alt={item.value} />
                                     </div>
                                 </label>) }
                                 <div className="col-12">

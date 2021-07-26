@@ -35,7 +35,6 @@ export default class Nav extends Component {
     }
 
     render() {
-        const { currentPage } = this.state;
         const pathname = window.location.pathname;
         console.log(pathname);
         return <div className='navigation'>
