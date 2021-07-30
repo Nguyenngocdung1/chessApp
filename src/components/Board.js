@@ -17,7 +17,6 @@ export default class Board extends Component {
             whiteTurn: true,
             check: '',
             kingControlledSquares: [],
-
         }
     }
 
@@ -196,7 +195,7 @@ export default class Board extends Component {
         let _allSquare = JSON.parse(JSON.stringify(allSquare));
         let possibleMovesRandomPiece = [];
         let AIPieces = [];
-        
+
         this.getAllPossibleAiPieces(AIPieces);
         let _AIPieces = JSON.parse(JSON.stringify(AIPieces));
         for (let n = 0; n < _AIPieces.length; n++) {
@@ -240,14 +239,14 @@ export default class Board extends Component {
         let allMoveOfAI = this.allMoveOfAI();
         let minBoard = this.totalValueBoard(allMoveOfAI[0].board);
         let min = allMoveOfAI[0];
-        for(let i = 0; i < allMoveOfAI.length; i++) {
-            if(this.totalValueBoard(allMoveOfAI[i].board) < minBoard) {
+        for (let i = 0; i < allMoveOfAI.length; i++) {
+            if (this.totalValueBoard(allMoveOfAI[i].board) < minBoard) {
                 minBoard = this.totalValueBoard(allMoveOfAI[i].board);
                 min = allMoveOfAI[i];
             }
         }
-        if(allMoveOfAI.length >= 2) {
-            if(this.totalValueBoard(allMoveOfAI[0].board) === this.totalValueBoard(allMoveOfAI[1].board) && this.totalValueBoard(allMoveOfAI[0].board) === minBoard) {
+        if (allMoveOfAI.length >= 2) {
+            if (this.totalValueBoard(allMoveOfAI[0].board) === this.totalValueBoard(allMoveOfAI[1].board) && this.totalValueBoard(allMoveOfAI[0].board) === minBoard) {
                 let randomMove = allMoveOfAI[Math.floor(Math.random() * allMoveOfAI.length)];
                 return randomMove
             }
@@ -258,10 +257,11 @@ export default class Board extends Component {
         else {
             return min
         }
-        
+
     }
 
     randomAI() {
+        const { whiteTurn } = this.state;
         let allMoveOfAI = this.allMoveOfAI();
         if (!allMoveOfAI.length) {
             alert("Checkmate!!!");
@@ -270,6 +270,7 @@ export default class Board extends Component {
             // let randomMove = allMoveOfAI[Math.floor(Math.random() * allMoveOfAI.length)];
             let randomMove = this.minValue();
             this.movePiece(randomMove.move.x, randomMove.move.y, randomMove.pieceToMove.x, randomMove.pieceToMove.y, randomMove.pieceToMove.currentPiece, randomMove.pieceToMove.pieceColor, randomMove.pieceToMove.pieceValue);
+            this.props.runTime(whiteTurn);
         }
     }
 
@@ -369,27 +370,15 @@ export default class Board extends Component {
 
     choosePieceToMove(pos, pie, pieColor, x, y, value) {
         const { willMove, allSquare, whiteTurn } = this.state;
+        const { runTime } = this.props
         if (((!willMove.ready && pie !== '')
             || (pieColor === willMove.color && pos !== willMove.position && pieColor !== ''))
         ) {
-            // if (this.checkIfCheckKing() !== "Not") {
             let allMove = this.allMoveOfAI();
             this.defaultPossibleToMove();
             this.setState({
                 willMove: { piece: pie, position: pos, ready: true, color: pieColor, value: value, curX: x, curY: y }
             })
-
-            // for(let i = 0; i < allMove.length; i++) {
-            //     if (whiteTurn && pos === allMove[i].pieceToMove.position) {
-            //         allSquare.forEach((item, xSquare) => {
-            //             allSquare[xSquare].forEach((item2, ySquare) => {
-            //                 if (item2.position === allMove[i].move.position) {
-            //                     allSquare[xSquare][ySquare].possibleToMove = true;
-            //                 }
-            //             })
-            //         })
-            //     }
-            // }
 
             allMove.forEach((move) => {
                 if (whiteTurn && pos === move.pieceToMove.position) {
@@ -414,8 +403,9 @@ export default class Board extends Component {
                 if (whiteTurn) {
                     setTimeout(() => {
                         this.randomAI();
-                    }, 1000)
+                    }, 2000)
                 }
+                runTime(whiteTurn);
             }
 
         }
