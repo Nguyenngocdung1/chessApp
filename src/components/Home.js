@@ -13,6 +13,8 @@ import Profile from './Profile';
 import ArticlesList from './ArticlesList';
 import Lesson from './Lesson';
 import HistoryPage from './HistoryPage';
+import Friends from './Friends';
+import Users from './Users';
 
 // container
 
@@ -36,9 +38,6 @@ export default class Home extends Component {
                     <Route path="/gamewithai">
                         <PlayWithAiContainer />
                     </Route>
-                    <Route path="/users">
-                        <HomePage />
-                    </Route>
                     <Route path="/articles">
                         <ArticlesList />
                     </Route>
@@ -50,6 +49,12 @@ export default class Home extends Component {
                     </Route>
                     <Route path="/history">
                         <HistoryPage />
+                    </Route>
+                    <Route path="/users">
+                        <Users />
+                    </Route>
+                    <Route path="/friends">
+                        <Friends />
                     </Route>
                     <Route path="/">
                         <HomePage />
